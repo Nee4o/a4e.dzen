@@ -1,0 +1,54 @@
+﻿@import url('file:///D:\otcheti\ИСРПО\3 лаба\Sabirov.WebApi.DB\Sabirov.WebApi.DB\wwwroot\style.css');
+html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
+#content{
+    text-align:center;
+    width:500px;
+    height:auto;
+    border-width:3px;
+    border-color:black;
+
+}
+.regFormInputs {
+    width: 100%;
+    border-color: black;
+    border-width:2px;
+    text-align:left;
+
+}
+#btnP{
+    text-align:center;
+}
+#submitBTN {
+    border-color: black;
+    width: 300px;
+
+    background-color: #007acc;
+}
+.regLabels{
+    text-align:left;
+}
+* {
+   
+    font-family: "Boncegro FF 4F";
+    letter-spacing:3px;
+    font-size: 24px;
+    margin: 5px;
+}
+@font-face {
+    font-family: "Boncegro FF 4F";
+    src: url("../fonts/Boncegro FF 4F.otf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+} 
