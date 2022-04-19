@@ -1,4 +1,4 @@
-﻿var curUser = new Object();
+﻿
 async function CreateArticle(articleTitle, articleContent, articleBinaryImage, articalDate) {
     if (articleTitle == "" || articleContent == "" || articalDate == "") {
         alert("Были обнаружены пустые поля");
@@ -15,7 +15,7 @@ async function CreateArticle(articleTitle, articleContent, articleBinaryImage, a
             content: articleContent,
             binary: null,
             date: null,
-            author: parseInt(1)
+            author: parseInt(window.currentUser.id)
         })
     });
     if (response.ok === true) {
@@ -60,7 +60,7 @@ async function Login(username, userpass) {
         headers: { "Accept": "application/json" }
     });
     if (response.ok == true) {
-        curUser = await response.json();
+        window.currentUser = await response.json();
         alert("Успешно!");
     }
     else {
