@@ -49,7 +49,6 @@ namespace Ache.Dzen.Bars.Controllers
                 return Ok(userModel);
             }
 
-
             [HttpPut("{id}")]
             public async Task<ActionResult<User>> Put(User userModel)
             {
@@ -76,6 +75,15 @@ namespace Ache.Dzen.Bars.Controllers
                 await _userDB.SaveChangesAsync();
                 return Ok(user);
             }
-        
+            
+            [HttpPost]
+            public async Task<ActionResult<Article>> CreateArticle(Article article)
+            {
+                if (article == null)
+                    return BadRequest();
+                _userDB._articleContext.Add(article);
+                await _userDB.SaveChangesAsync();
+                return Ok(article);
+            }
     }
 }
