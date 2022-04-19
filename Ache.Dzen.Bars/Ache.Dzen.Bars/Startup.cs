@@ -31,7 +31,7 @@ namespace Ache.Dzen.Bars
                 {
                     DataSource = "(localdb)\\MSSQLLocalDB",
                     IntegratedSecurity = true,
-                    InitialCatalog = "DBUsers"
+                    InitialCatalog = "DzenDB"
                 };
                 return sb.ConnectionString;
             }

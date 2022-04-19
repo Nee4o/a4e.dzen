@@ -1,10 +1,11 @@
-﻿async function CreateArticle(articleTitle, articleContent, articleBinaryImage, articalDate, userId) {
+﻿var curUser = new Object();
+async function CreateArticle(articleTitle, articleContent, articleBinaryImage, articalDate) {
     if (articleTitle == "" || articleContent == "" || articalDate == "") {
         alert("Были обнаружены пустые поля");
         return;
     }
-    const response = await fetch("api/dzenapi", {
-        method: "CreateArticle",
+    const response = await fetch("api/dzenapiarticle", {
+        method: "Post",
         headers: {
             "Accept": "application/json", "Content-Type":
                 "application/json"
@@ -12,9 +13,9 @@
         body: JSON.stringify({
             title: articleTitle,
             content: articleContent,
-            binary: articleBinaryImage,
-            date: articalDate,
-            author: userId
+            binary: null,
+            date: null,
+            author: parseInt(1)
         })
     });
     if (response.ok === true) {
@@ -30,8 +31,8 @@ async function CreateUser(userName, userPass, userMail) {
         alert("Введите хотя бы имя пользователя!");
         return;
     }    
-    const response = await fetch("api/dzenapi", {
-        method: "POST",
+    const response = await fetch("api/dzenapiuser", {
+        method: "Post",
         headers: {
             "Accept": "application/json", "Content-Type":
                 "application/json"
@@ -45,6 +46,7 @@ async function CreateUser(userName, userPass, userMail) {
     });
     if (response.ok === true) {
         const user = await response.json();
+     
         alert("Регистрация успешна! " + user.login);
     }
     else {
@@ -53,11 +55,12 @@ async function CreateUser(userName, userPass, userMail) {
 }
 
 async function Login(username, userpass) {
-    const response = await fetch("/api/dzenapi/"+username+"/"+userpass , {
+    const response = await fetch("/api/dzenapiuser/"+username+"/"+userpass , {
         method: "Get",
         headers: { "Accept": "application/json" }
     });
     if (response.ok == true) {
+        curUser = await response.json();
         alert("Успешно!");
     }
     else {
@@ -94,6 +97,6 @@ function PostingFunction() {
         const articleContent = form.elements["contentTB"].value;
         const articleImage = form.elements["imageB"].value;
         const articleDate = formatedDate;
-        CreateArticle(titleName, articleContent, articleImage, articleDate, 0); // вместо затычки (0) - авторизованный пользователь
+        CreateArticle(titleName, articleContent, articleImage, articleDate); // вместо затычки (0) - авторизованный пользователь
     })
 };

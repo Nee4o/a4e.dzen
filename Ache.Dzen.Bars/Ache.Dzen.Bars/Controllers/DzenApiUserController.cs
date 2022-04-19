@@ -10,11 +10,11 @@ namespace Ache.Dzen.Bars.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DzenApiController:ControllerBase
+    public class DzenApiUserController : ControllerBase
     {
         
             private DzenDbContext? _userDB;
-            public DzenApiController(DzenDbContext _context)
+            public DzenApiUserController(DzenDbContext _context)
             {
                 _userDB = _context;
             }
@@ -75,15 +75,7 @@ namespace Ache.Dzen.Bars.Controllers
                 await _userDB.SaveChangesAsync();
                 return Ok(user);
             }
-            
-            [HttpPost]
-            public async Task<ActionResult<Article>> CreateArticle(Article article)
-            {
-                if (article == null)
-                    return BadRequest();
-                _userDB._articleContext.Add(article);
-                await _userDB.SaveChangesAsync();
-                return Ok(article);
-            }
+
+        
     }
 }
