@@ -1,4 +1,4 @@
-﻿
+﻿var curUser = new Object();
 async function CreateArticle(articleTitle, articleContent, articleBinaryImage, articalDate) {
     if (articleTitle == "" || articleContent == "" || articalDate == "") {
         alert("Были обнаружены пустые поля");
@@ -54,6 +54,21 @@ async function CreateUser(userName, userPass, userMail) {
     }
 }
 
+//поиск
+async function Search() {
+    //document.getElementById('result').innerHTML = '';
+    //var l = this.value.length;
+    //if (l > 0) {
+    //    for (var i = 0; i < arr.length; i++) {
+    //        var _ = arr[i].split('').slice(0, l).join('');
+    //        if (_ == this.value) {
+    //            document.getElementById('result').innerHTML += arr[i] + '<br/>';
+    //        }
+    //    }
+    //}
+}
+
+
 async function Login(username, userpass) {
     const response = await fetch("/api/dzenapiuser/"+username+"/"+userpass , {
         method: "Get",
@@ -86,6 +101,14 @@ function LoginFunction() {
         Login(username, userpass);
     });
 }
+
+function ArticleFunction() {
+    document.getElementById('search').addEventListener("onkeyup", e => {
+        e.preventDefault();
+
+    });
+}
+
 function PostingFunction() {
     const nowDate = new Date();
     const formatedDate = nowDate.getDate() + "." + (nowDate.getMonth() + 1) + "." + nowDate.getFullYear();
