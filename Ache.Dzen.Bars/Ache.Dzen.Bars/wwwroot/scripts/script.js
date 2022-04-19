@@ -1,4 +1,5 @@
-﻿var curUser = new Object();
+﻿var curUser = new CreateUser();
+
 async function CreateArticle(articleTitle, articleContent, articleBinaryImage, articalDate) {
     if (articleTitle == "" || articleContent == "" || articalDate == "") {
         alert("Были обнаружены пустые поля");
@@ -61,6 +62,7 @@ async function Login(username, userpass) {
     });
     if (response.ok == true) {
         curUser = await response.json();
+        window.location.href = "articles.html";
         alert("Успешно!");
     }
     else {
