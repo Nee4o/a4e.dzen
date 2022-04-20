@@ -16,7 +16,32 @@ namespace Ache.Dzen.Bars.Controllers
         {
             _dbcontext = _context;
         }
+        [HttpGet]
+        public async Task<IEnumerable<Article>> Get()
+        {
+            return await _dbcontext._articleContext.ToListAsync();
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Article>> Get(int id)
+        {
+            var art =
+                await _dbcontext._articleContext.FirstOrDefaultAsync(
+                    x => x.Id == id);
+            if (art == null) return BadRequest();
+            return Ok(art);
+        }
 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Article>> Delete(int id)
+        {
+            var art =
+                await _dbcontext._articleContext.FirstOrDefaultAsync(
+                    x => x.Id == id);
+            if (art == null) return BadRequest();
+            _dbcontext._articleContext.Remove(art);
+            await _dbcontext.SaveChangesAsync();
+            return Ok();
+        }
         [HttpPost]
         public async Task<ActionResult<Article>> Post(Article article)
         {
