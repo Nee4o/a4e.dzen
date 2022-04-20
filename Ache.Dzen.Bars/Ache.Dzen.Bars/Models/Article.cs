@@ -8,10 +8,10 @@ namespace Ache.Dzen.Bars
         public int Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public byte[] Binary { get; set; }
-        public DateTime Date { get; set; }
+        public string? Binary { get; set; }
+        public string? Date { get; set; }
         public int UserId { get; set; }
-        public User user { get; set; }
+        public User? user { get; set; }
 
     }
 }

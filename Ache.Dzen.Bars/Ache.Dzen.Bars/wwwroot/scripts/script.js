@@ -1,9 +1,11 @@
 ﻿var curUser = new Object();
 async function CreateArticle(articleTitle, articleContent, articleBinaryImage, articalDate) {
+    let curuserId = GetCurrentUser();
     if (articleTitle == "" || articleContent == "" || articalDate == "") {
         alert("Были обнаружены пустые поля");
         return;
     }
+    //alert(GetCurrentUser());
     const response = await fetch("api/dzenapiarticle", {
         method: "Post",
         headers: {
@@ -14,8 +16,8 @@ async function CreateArticle(articleTitle, articleContent, articleBinaryImage, a
             title: articleTitle,
             content: articleContent,
             binary: null,
-            date: null,
-            author: parseInt(window.currentUser.id)
+            date: Date.now(),
+            userId: parseInt(curuserId)
         })
     });
     if (response.ok === true) {
@@ -67,15 +69,18 @@ async function Search() {
     //    }
     //}
 }
-
-
+function GetCurrentUser(){
+    return document.cookie.match(/id=(.+?)(;|$)/)[1];
+}
 async function Login(username, userpass) {
     const response = await fetch("/api/dzenapiuser/"+username+"/"+userpass , {
         method: "Get",
         headers: { "Accept": "application/json" }
     });
     if (response.ok == true) {
-        window.currentUser = await response.json();
+        
+        window.curUser = await response.json();
+        document.cookie = "id="+window.curUser.id;
         alert("Успешно!");
     }
     else {
@@ -105,7 +110,6 @@ function LoginFunction() {
 function ArticleFunction() {
     document.getElementById('search').addEventListener("onkeyup", e => {
         e.preventDefault();
-
     });
 }
 
