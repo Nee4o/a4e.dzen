@@ -1,11 +1,12 @@
 ﻿var curUser = new Object();
+
 async function CreateArticle(articleTitle, articleContent, articleBinaryImage, articalDate) {
     let curuserId = GetCurrentUser();
     if (articleTitle == "" || articleContent == "" || articalDate == "") {
         alert("Были обнаружены пустые поля");
         return;
     }
-    //alert(GetCurrentUser());
+    
     const response = await fetch("api/dzenapiarticle", {
         method: "Post",
         headers: {
@@ -16,7 +17,7 @@ async function CreateArticle(articleTitle, articleContent, articleBinaryImage, a
             title: articleTitle,
             content: articleContent,
             binary: null,
-            date: Date.now().toString(),
+            date: articalDate,
             userId: parseInt(curuserId),
             user: null
         })
@@ -118,6 +119,7 @@ function PostingFunction() {
     const nowDate = new Date();
     const formatedDate = nowDate.getDate() + "." + (nowDate.getMonth() + 1) + "." + nowDate.getFullYear();
     document.getElementById("dateFolder").innerHTML = formatedDate;
+    
     document.getElementById("postsubmitBTN").addEventListener("click", e => {
         e.preventDefault();
         const form = document.forms["postForm"];
