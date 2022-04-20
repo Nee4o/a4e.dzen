@@ -16,13 +16,14 @@ async function CreateArticle(articleTitle, articleContent, articleBinaryImage, a
             title: articleTitle,
             content: articleContent,
             binary: null,
-            date: Date.now(),
-            userId: parseInt(curuserId)
+            date: Date.now().toString(),
+            userId: parseInt(curuserId),
+            user: null
         })
     });
     if (response.ok === true) {
         const article = await response.json();
-        alert("Создана статья " + article.articleTitle);
+        alert("Создана статья " + article.title);
     }
     else
         alert("Ошибка");
